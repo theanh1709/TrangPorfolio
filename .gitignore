@@ -1,0 +1,51 @@
+# Dependencies & Package Managers
+node_modules/
+.pnpm-store/
+
+# Build & Framework Outputs (React Router v7 / Vite / Cloudflare Workers)
+build/
+dist/
+.react-router/
+.wrangler/
+worker-configuration.d.ts.bak
+
+# Secrets & Environment Variables (NEVER COMMIT)
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+
+# Testing & QA Artifacts
+coverage/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Raw Portfolio Media & Source Office Docs -> Stored on Cloudflare R2 Blob Storage
+*.mp4
+*.mov
+*.pdf
+*.pptx
+*.xlsx
+*.docx
+/*.png
+/*.jpg
+/*.jpeg
+/0605 Beyond The Desk/
+/Internal Communication at Phu Hung Life/
+/New CEO PR Article at Phu Hung Life/
+/New Website/
+/Định hướng nhận diện thương hiệu CNTL/
+raw-media/
