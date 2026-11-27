@@ -8,6 +8,7 @@ dist/
 .react-router/
 .wrangler/
 worker-configuration.d.ts.bak
+assets-out/
 
 # Secrets & Environment Variables (NEVER COMMIT)
 .env
@@ -33,7 +34,12 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 
-# Raw Portfolio Media & Source Office Docs -> Stored on Cloudflare R2 Blob Storage
+# Scratch / Reference Archives
+/Claude outputs/
+/ThuyTrangPorfolio/
+*.zip
+
+# Raw Portfolio Media & Source Office Docs -> Stored on Cloudflare R2 / D1 Blob Storage
 *.mp4
 *.mov
 *.pdf

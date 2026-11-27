@@ -1,0 +1,95 @@
+name: CI & Cloudflare Wrangler Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  verify:
+    name: Typecheck, Lint, Unit & Playwright E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type generation & TypeScript check
+        run: npm run typecheck
+
+      - name: ESLint check
+        run: npm run lint
+
+      - name: Vitest unit tests
+        run: npm run test
+
+      - name: Seed local D1 & build production bundle
+        run: |
+          npm run db:migrate:local
+          npm run db:seed:local
+          node --experimental-sqlite ./node_modules/tsx/dist/cli.mjs scripts/seed-blobs-local.ts
+          npm run build
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright E2E & WCAG AA checks
+        run: npm run test:e2e
+
+  deploy:
+    name: Deploy to Cloudflare Workers (Wrangler)
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: verify
+    runs-on: ubuntu-latest
+    env:
+      HAS_CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    steps:
+      - name: Checkout repository
+        if: env.HAS_CF_TOKEN == 'true'
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22 LTS
+        if: env.HAS_CF_TOKEN == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies & build
+        if: env.HAS_CF_TOKEN == 'true'
+        run: |
+          npm ci
+          npm run build
+
+      - name: Apply D1 migrations & seed remote database
+        if: env.HAS_CF_TOKEN == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 migrations apply portfolio-db --remote
+
+      - name: Deploy Worker via Wrangler
+        if: env.HAS_CF_TOKEN == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Cloudflare Workers Builds note
+        if: env.HAS_CF_TOKEN != 'true'
+        run: |
+          echo "CLOUDFLARE_API_TOKEN secret is not set in GitHub Actions; deployment is handled automatically by Cloudflare Workers Builds connected to main."

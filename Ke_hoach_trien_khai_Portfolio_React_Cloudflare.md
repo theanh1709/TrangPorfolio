@@ -20,7 +20,7 @@ File này trả lời câu hỏi **làm thế nào**: chọn công nghệ gì, k
 | Cơ sở dữ liệu | **Cloudflare D1** (SQLite) + **Drizzle ORM** | Lưu nội dung có cấu trúc: kinh nghiệm, dự án, kỹ năng, bài viết, tác phẩm |
 | Lưu file (blob) | **Cloudflare R2** | Ảnh, video, PDF. Không mất phí băng thông ra ngoài |
 | Kiểm thử | Vitest (unit), Playwright (E2E, responsive, a11y) | |
-| CI/CD | GitHub + GitHub Actions (hoặc Workers Builds của Cloudflare) | Preview cho mỗi pull request, deploy khi merge vào `main` |
+| CI/CD | GitHub + **Workers Builds** của Cloudflare (nâng cấp lên GitHub Actions khi cần) | Cloudflare tự build khi push: nhánh phụ có URL xem trước, merge vào `main` thì deploy production |
 
 > **Lưu ý quan trọng về "database R2":** R2 là kho lưu **file** (object storage, kiểu S3), không phải cơ sở dữ liệu dạng bảng. Kế hoạch này dùng:
 > - **D1** cho dữ liệu dạng bảng (tương đương "bảng database").
@@ -232,7 +232,7 @@ pnpm wrangler r2 bucket create portfolio-media-preview   # cho môi trường pr
 
 - `main`, `assets` và các trường khác do template sinh ra thì giữ nguyên.
 - Thay `portfolio.example.com` bằng tên miền thật.
-- Môi trường `staging` cần D1 và R2 riêng: tạo thêm `portfolio-db-staging` và `portfolio-media-staging`, khai báo lại trong khối `env.staging`.
+- Giai đoạn đầu dùng Workers Builds với URL xem trước, chưa cần staging (mục 12.6). Khi dựng staging riêng (mục 12.7), tạo thêm `portfolio-db-staging` và `portfolio-media-staging`, khai báo lại trong khối `env.staging`.
 
 ---
 
@@ -675,15 +675,16 @@ Chạy E2E trên bản build chạy local trong môi trường Workers (`pnpm pr
 
 ## 12. Môi trường và deploy
 
-### 12.1 Ba môi trường
+### 12.1 Môi trường
 
 | Môi trường | Worker | D1 | R2 | Kích hoạt |
 | --- | --- | --- | --- | --- |
 | Local | `pnpm dev` | D1 local (`--local`) | Bucket preview hoặc local | Trên máy dev |
-| Staging | `portfolio-le-thuy-trang-staging` | `portfolio-db-staging` | `portfolio-media-staging` | Mỗi pull request / nhánh `develop` |
+| Preview | Bản xem trước của `portfolio-le-thuy-trang` | Dùng chung `portfolio-db` (chỉ đọc) | Dùng chung `portfolio-media` | Push nhánh khác `main` (Workers Builds) |
+| Staging (giai đoạn sau) | `portfolio-le-thuy-trang-staging` | `portfolio-db-staging` | `portfolio-media-staging` | Khi chuyển sang GitHub Actions (mục 12.7) |
 | Production | `portfolio-le-thuy-trang` | `portfolio-db` | `portfolio-media` | Merge vào `main` |
 
-Khi cần dữ liệu thật lúc dev, bật `"remote": true` cho binding trong `wrangler.jsonc`: code vẫn chạy local nhưng đọc/ghi D1/R2 trên Cloudflare. Chỉ dùng với bản staging.
+Khi cần dữ liệu thật lúc dev, bật `"remote": true` cho binding trong `wrangler.jsonc`: code vẫn chạy local nhưng đọc/ghi D1/R2 trên Cloudflare. Chỉ đọc, không ghi thử dữ liệu vào production.
 
 ### 12.2 Script trong `package.json`
 
@@ -739,7 +740,102 @@ Sau lệnh cuối, Wrangler in ra URL dạng `https://portfolio-le-thuy-trang.<t
 3. `pnpm deploy` lại. Cloudflare tự cấp SSL.
 4. (Tùy chọn) Gắn `media.portfolio.example.com` cho bucket R2 nếu phục vụ ảnh trực tiếp.
 
-### 12.5 CI/CD với GitHub Actions
+### 12.5 Đưa code lên GitHub
+
+1. Tạo repo trên GitHub, ví dụ `portfolio-le-thuy-trang`.
+   - Để **private** nếu seed chứa số điện thoại, email cá nhân.
+   - Để public nếu muốn nhà tuyển dụng xem code.
+2. Kiểm tra `.gitignore` trước khi commit lần đầu:
+   ```gitignore
+   node_modules/
+   build/
+   .react-router/
+   .wrangler/
+   .dev.vars*
+   .env*
+   worker-configuration.d.ts
+   assets-src/
+   assets-out/
+   playwright-report/
+   test-results/
+   ```
+   - Không commit secret: token chỉ nằm trong cài đặt của Cloudflare.
+   - Không commit ảnh và video gốc: chúng được đưa lên R2 bằng `pnpm assets:upload`. Repo chỉ giữ code, seed và `manifest.json`. Nếu cần lưu file gốc trong git, dùng Git LFS.
+3. Thêm file `.node-version` chứa `22` để Cloudflare build bằng đúng phiên bản Node.
+4. Push lên GitHub:
+   ```bash
+   git add .
+   git commit -m "Khởi tạo portfolio"
+   git branch -M main
+   git remote add origin https://github.com/<tài-khoản>/portfolio-le-thuy-trang.git
+   git push -u origin main
+   ```
+
+### 12.6 CI/CD với Workers Builds (bắt đầu từ đây)
+
+Workers Builds là tính năng build có sẵn của Cloudflare:
+- Cloudflare kết nối thẳng với repo GitHub.
+- Mỗi lần push, Cloudflare tự build và deploy.
+- Không cần viết file pipeline, không cần tạo API token hay GitHub Secrets.
+
+**Luồng hoạt động**
+
+```text
+git push nhánh tính năng ──► Workers Builds ──► Build command ──► Preview command ──► URL xem trước (không ảnh hưởng production)
+git push / merge vào main ──► Workers Builds ──► Build command ──► Deploy command ──► Production (tên miền thật)
+```
+
+**Bước 1: Kết nối repo**
+1. Deploy thủ công lần đầu (mục 12.3), để Worker `portfolio-le-thuy-trang` đã tồn tại.
+2. Mở Dashboard → Workers & Pages → `portfolio-le-thuy-trang` → **Settings → Build**.
+3. Bấm **Connect**, chọn GitHub, cấp quyền cho Cloudflare GitHub App trên repo `portfolio-le-thuy-trang`.
+4. Production branch: chọn `main`.
+
+**Bước 2: Cấu hình lệnh build**
+
+| Trường | Giá trị | Ý nghĩa |
+| --- | --- | --- |
+| Build command | `pnpm typecheck && pnpm lint && pnpm test && pnpm build` | Lỗi type, lint hoặc unit test làm build thất bại, nên code lỗi không được deploy |
+| Deploy command | `pnpm wrangler d1 migrations apply portfolio-db --remote && pnpm wrangler deploy` | Chạy migration D1 trước, rồi mới đưa bản mới lên production |
+| Preview command (nhánh khác `main`) | Giữ mặc định của Cloudflare | Tạo bản xem trước, không đụng production |
+| Root directory | `/` | Để trống nếu dự án nằm ở gốc repo |
+
+- Workers Builds dùng đúng phiên bản Wrangler khai báo trong `package.json`.
+- Workers Builds tự nhận ra pnpm qua file `pnpm-lock.yaml`.
+
+**Bước 3: Bật bản xem trước cho nhánh khác**
+- Vào **Settings → Build → Branch control**, bật **Builds for non-production branches**.
+- Mỗi lần push nhánh khác `main`, Cloudflare tạo một URL xem trước. URL này nằm ở mục **Previews** của Worker và xuất hiện trong comment của pull request trên GitHub.
+
+**Bước 4: Biến môi trường**
+- Biến **lúc chạy** như `SITE_URL` khai báo trong `vars` của `wrangler.jsonc` (đã có ở mục 3.3).
+- Biến **lúc build** khai báo trong **Settings → Build → Variables and secrets**. Biến build không đọc được khi Worker chạy.
+
+**Quy trình làm việc hằng ngày**
+1. Tạo nhánh mới: `git checkout -b sua-trang-woori`.
+2. Sửa code, chạy local: `pnpm dev`. Trước khi push, chạy E2E: `pnpm test:e2e`.
+3. Push nhánh, mở pull request trên GitHub, rồi kiểm tra trên URL xem trước (điện thoại, tablet, máy tính).
+4. Merge vào `main`: Cloudflare tự chạy migration và deploy production.
+5. Xem tiến trình và log build ở **Deployments → View build history** của Worker.
+
+**Lưu ý khi dùng Workers Builds**
+- **Bản xem trước dùng chung D1 và R2 với production.**
+  - Portfolio chỉ đọc dữ liệu nên an toàn.
+  - Không chạy migration hay ghi dữ liệu thử trong nhánh xem trước; migration chỉ nằm trong Deploy command của `main`.
+- **Migration phải tương thích ngược**, nghĩa là chỉ thêm bảng hoặc cột, không xóa hay đổi tên trong cùng một lần deploy.
+  - Lý do: migration chạy trước deploy, nên code cũ vẫn phục vụ trong vài giây với schema mới.
+- **Lỗi quyền khi chạy migration:** nếu Deploy command báo thiếu quyền D1, tạo API token có quyền D1 (Edit) và chọn token đó trong phần cài đặt build.
+- **Playwright (E2E) không chạy trong Workers Builds**, vì môi trường build không có sẵn trình duyệt. Giai đoạn này chạy E2E trên máy trước khi merge. Khi cần bắt buộc tự động, chuyển sang mục 12.7.
+- **Bỏ môi trường staging riêng ở giai đoạn này:** URL xem trước của từng nhánh đã thay cho staging. Khối `env.staging` trong `wrangler.jsonc` có thể giữ lại cho sau này.
+
+### 12.7 Nâng cấp sau: GitHub Actions
+
+Chuyển sang GitHub Actions khi có một trong các nhu cầu sau:
+- Muốn E2E Playwright tự động chặn pull request.
+- Cần staging với D1/R2 tách biệt khỏi production.
+- Có nhiều người cùng sửa code.
+
+**Khi chuyển:** tắt Workers Builds trong **Settings → Build** (Disconnect), để không bị deploy hai lần cho cùng một commit.
 
 `.github/workflows/deploy.yml`:
 
@@ -807,9 +903,9 @@ jobs:
 
 - Tạo API token trong Dashboard → My Profile → API Tokens, quyền tối thiểu: Workers Scripts (Edit), D1 (Edit), R2 (Edit), Account Settings (Read).
 - Lưu token vào GitHub Secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
-- **Cách thay thế:** kết nối repo trực tiếp trong Dashboard (Workers Builds) để Cloudflare tự build và deploy, có preview URL cho mỗi nhánh.
+- Tạo D1 `portfolio-db-staging` và R2 `portfolio-media-staging`, khai báo trong `env.staging` (mục 3.3).
 
-### 12.6 Rollback và theo dõi
+### 12.8 Rollback và theo dõi
 - Rollback nhanh:
   ```bash
   pnpm wrangler deployments list
@@ -836,7 +932,7 @@ jobs:
 | 4. Trang chính | Nav, Hero, Kinh nghiệm, Dự án, Năng lực, Bài viết, Thiết kế (Bloomsky + Thiết kế khác), Liên hệ, Footer | `/` hoàn chỉnh trên mọi viewport | 2–3 ngày |
 | 5. Trang dự án | Template case-study, layout riêng Phú Hưng Life, so sánh trước/sau, video, mục lục, thanh tiến độ | 3 trang `/du-an/*` hoàn chỉnh | 1,5–2 ngày |
 | 6. Chất lượng | SEO, sitemap, OG image, CSP; Playwright đủ kịch bản mục 11; Lighthouse; sửa lỗi Safari/iOS | Checklist mục 14 đạt | 1–1,5 ngày |
-| 7. Phát hành | Tên miền, CI/CD, staging, production, hướng dẫn cập nhật nội dung | Website chạy trên tên miền thật | 0,5 ngày |
+| 7. Phát hành | Đẩy code lên GitHub, kết nối Workers Builds, bật bản xem trước, gắn tên miền, hướng dẫn cập nhật nội dung | Push `main` tự lên website thật | 0,5 ngày |
 
 Tổng ước lượng: khoảng **8–10 ngày làm việc** cho một lập trình viên.
 
@@ -852,7 +948,8 @@ Tổng ước lượng: khoảng **8–10 ngày làm việc** cho một lập tr
 - [ ] Reduced motion: không còn chuyển động, mọi nội dung hiện ngay.
 - [ ] Lighthouse mobile: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95; axe không lỗi serious/critical.
 - [ ] Nội dung xưng "tôi"; chức danh Phú Hưng Life "Senior Content Marketing"; CSR 1.000+ người tham dự, 95%.
-- [ ] CI chạy đủ typecheck, lint, test, E2E; PR có staging; merge `main` tự deploy production.
+- [ ] Repo GitHub không chứa secret hay file media gốc.
+- [ ] Workers Builds: build chạy typecheck, lint, unit test; nhánh phụ có URL xem trước; merge `main` tự chạy migration và deploy production. E2E chạy trên máy trước khi merge.
 - [ ] Có hướng dẫn cập nhật nội dung:
   - Sửa nội dung: sửa seed → tạo migration/seed mới → deploy.
   - Thêm ảnh: chạy `assets:prepare` → `assets:upload`.

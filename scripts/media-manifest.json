@@ -1,0 +1,682 @@
+{
+  "hero/portrait.webp": {
+    "key": "hero/portrait.webp",
+    "contentType": "image/webp",
+    "width": 590,
+    "height": 601,
+    "bytes": 51104,
+    "etag": "\"bb124de1c2dc\""
+  },
+  "design/bloomsky/cover.webp": {
+    "key": "design/bloomsky/cover.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 80714,
+    "etag": "\"3fada8fa682f\""
+  },
+  "design/works/hoa-lo.webp": {
+    "key": "design/works/hoa-lo.webp",
+    "contentType": "image/webp",
+    "width": 1068,
+    "height": 797,
+    "bytes": 130522,
+    "etag": "\"5fe00753f41c\""
+  },
+  "design/works/cake-bliss.webp": {
+    "key": "design/works/cake-bliss.webp",
+    "contentType": "image/webp",
+    "width": 1198,
+    "height": 798,
+    "bytes": 46450,
+    "etag": "\"faa8dc562aef\""
+  },
+  "design/works/com-tuoi-moc-mien.webp": {
+    "key": "design/works/com-tuoi-moc-mien.webp",
+    "contentType": "image/webp",
+    "width": 1202,
+    "height": 796,
+    "bytes": 28880,
+    "etag": "\"5b3a97cb7dd2\""
+  },
+  "design/works/dalat-hasfarm.webp": {
+    "key": "design/works/dalat-hasfarm.webp",
+    "contentType": "image/webp",
+    "width": 1067,
+    "height": 798,
+    "bytes": 50236,
+    "etag": "\"e9209cf76617\""
+  },
+  "design/bloomsky/p01.webp": {
+    "key": "design/bloomsky/p01.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 70190,
+    "etag": "\"60907ebe1016\""
+  },
+  "design/bloomsky/p02.webp": {
+    "key": "design/bloomsky/p02.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 33178,
+    "etag": "\"e86a356d0702\""
+  },
+  "design/bloomsky/p03.webp": {
+    "key": "design/bloomsky/p03.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 100828,
+    "etag": "\"1c5b24d134ca\""
+  },
+  "design/bloomsky/p04.webp": {
+    "key": "design/bloomsky/p04.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 79912,
+    "etag": "\"e4a8a70abb6d\""
+  },
+  "design/bloomsky/p05.webp": {
+    "key": "design/bloomsky/p05.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 30988,
+    "etag": "\"5d945d1cb1bf\""
+  },
+  "design/bloomsky/p06.webp": {
+    "key": "design/bloomsky/p06.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 54462,
+    "etag": "\"74248872ab3a\""
+  },
+  "design/bloomsky/p07.webp": {
+    "key": "design/bloomsky/p07.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 57228,
+    "etag": "\"7fc2dbb538b8\""
+  },
+  "design/bloomsky/p08.webp": {
+    "key": "design/bloomsky/p08.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 49678,
+    "etag": "\"bb1ec7568b82\""
+  },
+  "design/bloomsky/p09.webp": {
+    "key": "design/bloomsky/p09.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 133710,
+    "etag": "\"eb64d84e9b5a\""
+  },
+  "design/bloomsky/p10.webp": {
+    "key": "design/bloomsky/p10.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 41844,
+    "etag": "\"fc97e93c06b1\""
+  },
+  "design/bloomsky/p11.webp": {
+    "key": "design/bloomsky/p11.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 146368,
+    "etag": "\"dbcddec4397f\""
+  },
+  "design/bloomsky/p12.webp": {
+    "key": "design/bloomsky/p12.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 35684,
+    "etag": "\"74f1f58f366d\""
+  },
+  "design/bloomsky/p13.webp": {
+    "key": "design/bloomsky/p13.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 39602,
+    "etag": "\"147219981375\""
+  },
+  "design/bloomsky/p14.webp": {
+    "key": "design/bloomsky/p14.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 92578,
+    "etag": "\"16fcaa45e327\""
+  },
+  "design/bloomsky/p15.webp": {
+    "key": "design/bloomsky/p15.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 119274,
+    "etag": "\"4007416ba22e\""
+  },
+  "design/bloomsky/p16.webp": {
+    "key": "design/bloomsky/p16.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 119718,
+    "etag": "\"eaaf9ab47770\""
+  },
+  "design/bloomsky/p17.webp": {
+    "key": "design/bloomsky/p17.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 133700,
+    "etag": "\"4bf7eabc0832\""
+  },
+  "design/bloomsky/p18.webp": {
+    "key": "design/bloomsky/p18.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 158026,
+    "etag": "\"f6f27743ff40\""
+  },
+  "design/bloomsky/p19.webp": {
+    "key": "design/bloomsky/p19.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 226726,
+    "etag": "\"3dadad8e9dea\""
+  },
+  "design/bloomsky/p20.webp": {
+    "key": "design/bloomsky/p20.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 82032,
+    "etag": "\"72613a73c354\""
+  },
+  "design/bloomsky/p21.webp": {
+    "key": "design/bloomsky/p21.webp",
+    "contentType": "image/webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 61658,
+    "etag": "\"eb4ec075517a\""
+  },
+  "cases/woori/cover-01.webp": {
+    "key": "cases/woori/cover-01.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 31604,
+    "etag": "\"51f9f70b0101\""
+  },
+  "cases/woori/cover-02.webp": {
+    "key": "cases/woori/cover-02.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 33400,
+    "etag": "\"315316f004fa\""
+  },
+  "cases/woori/cover-03.webp": {
+    "key": "cases/woori/cover-03.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 49930,
+    "etag": "\"ca20c1e94f47\""
+  },
+  "cases/woori/storyboard-01.webp": {
+    "key": "cases/woori/storyboard-01.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 20284,
+    "etag": "\"ed1c585a9b3d\""
+  },
+  "cases/woori/storyboard-02.webp": {
+    "key": "cases/woori/storyboard-02.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 31604,
+    "etag": "\"51f9f70b0101\""
+  },
+  "cases/woori/storyboard-03.webp": {
+    "key": "cases/woori/storyboard-03.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 22934,
+    "etag": "\"b9492fe80894\""
+  },
+  "cases/woori/storyboard-04.webp": {
+    "key": "cases/woori/storyboard-04.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 33400,
+    "etag": "\"315316f004fa\""
+  },
+  "cases/woori/storyboard-05.webp": {
+    "key": "cases/woori/storyboard-05.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 32146,
+    "etag": "\"79999ac82912\""
+  },
+  "cases/woori/storyboard-06.webp": {
+    "key": "cases/woori/storyboard-06.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 33016,
+    "etag": "\"59a40142156f\""
+  },
+  "cases/woori/storyboard-07.webp": {
+    "key": "cases/woori/storyboard-07.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 49930,
+    "etag": "\"ca20c1e94f47\""
+  },
+  "cases/woori/storyboard-08.webp": {
+    "key": "cases/woori/storyboard-08.webp",
+    "contentType": "image/webp",
+    "width": 479,
+    "height": 780,
+    "bytes": 48998,
+    "etag": "\"3812b8f83b64\""
+  },
+  "cases/cntl/cover.webp": {
+    "key": "cases/cntl/cover.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 1050,
+    "bytes": 247096,
+    "etag": "\"e51d82da09ae\""
+  },
+  "cases/cntl/feed-before-context.webp": {
+    "key": "cases/cntl/feed-before-context.webp",
+    "contentType": "image/webp",
+    "width": 1200,
+    "height": 686,
+    "bytes": 192054,
+    "etag": "\"c1114834df83\""
+  },
+  "cases/cntl/pillar-01.webp": {
+    "key": "cases/cntl/pillar-01.webp",
+    "contentType": "image/webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 68322,
+    "etag": "\"f794d8f2347c\""
+  },
+  "cases/cntl/pillar-02.webp": {
+    "key": "cases/cntl/pillar-02.webp",
+    "contentType": "image/webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 98234,
+    "etag": "\"cd78172bd2b6\""
+  },
+  "cases/cntl/pillar-03.webp": {
+    "key": "cases/cntl/pillar-03.webp",
+    "contentType": "image/webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 78130,
+    "etag": "\"3c58ce15dbd0\""
+  },
+  "cases/cntl/ba-before.webp": {
+    "key": "cases/cntl/ba-before.webp",
+    "contentType": "image/webp",
+    "width": 1200,
+    "height": 686,
+    "bytes": 192054,
+    "etag": "\"c1114834df83\""
+  },
+  "cases/cntl/ba-after.webp": {
+    "key": "cases/cntl/ba-after.webp",
+    "contentType": "image/webp",
+    "width": 1172,
+    "height": 776,
+    "bytes": 220930,
+    "etag": "\"b4a7b9c52a4b\""
+  },
+  "cases/cntl/stage-before.webp": {
+    "key": "cases/cntl/stage-before.webp",
+    "contentType": "image/webp",
+    "width": 1186,
+    "height": 778,
+    "bytes": 209138,
+    "etag": "\"92d8666e1565\""
+  },
+  "cases/cntl/stage-after.webp": {
+    "key": "cases/cntl/stage-after.webp",
+    "contentType": "image/webp",
+    "width": 1172,
+    "height": 775,
+    "bytes": 215440,
+    "etag": "\"5765d0131ecd\""
+  },
+  "cases/cntl/dish-01.webp": {
+    "key": "cases/cntl/dish-01.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 86358,
+    "etag": "\"773d13d400a2\""
+  },
+  "cases/cntl/dish-02.webp": {
+    "key": "cases/cntl/dish-02.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 106078,
+    "etag": "\"0b22dc3bea6b\""
+  },
+  "cases/cntl/dish-03.webp": {
+    "key": "cases/cntl/dish-03.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 109274,
+    "etag": "\"b1520020cf3d\""
+  },
+  "cases/cntl/dish-04.webp": {
+    "key": "cases/cntl/dish-04.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 104270,
+    "etag": "\"29e3f78ed47b\""
+  },
+  "cases/cntl/branch-q5.webp": {
+    "key": "cases/cntl/branch-q5.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 98910,
+    "etag": "\"a0c6911d6d9a\""
+  },
+  "cases/cntl/branch-joy.webp": {
+    "key": "cases/cntl/branch-joy.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 77652,
+    "etag": "\"93921aef1603\""
+  },
+  "cases/cntl/video-11-nam-poster.webp": {
+    "key": "cases/cntl/video-11-nam-poster.webp",
+    "contentType": "image/webp",
+    "width": 1280,
+    "height": 720,
+    "bytes": 167840,
+    "etag": "\"6772f248f7ed\""
+  },
+  "cases/cntl/opening-cn30.webp": {
+    "key": "cases/cntl/opening-cn30.webp",
+    "contentType": "image/webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 151712,
+    "etag": "\"b267d0503923\""
+  },
+  "cases/cntl/opening-pdg.webp": {
+    "key": "cases/cntl/opening-pdg.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 123076,
+    "etag": "\"57a80e7364ed\""
+  },
+  "cases/cntl/tet-01.webp": {
+    "key": "cases/cntl/tet-01.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 101986,
+    "etag": "\"3cdcdb245720\""
+  },
+  "cases/cntl/tet-02.webp": {
+    "key": "cases/cntl/tet-02.webp",
+    "contentType": "image/webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 79880,
+    "etag": "\"1d15f3287188\""
+  },
+  "cases/cntl/tet-03.webp": {
+    "key": "cases/cntl/tet-03.webp",
+    "contentType": "image/webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 154226,
+    "etag": "\"03348d321874\""
+  },
+  "cases/cntl/tet-04.webp": {
+    "key": "cases/cntl/tet-04.webp",
+    "contentType": "image/webp",
+    "width": 720,
+    "height": 900,
+    "bytes": 113036,
+    "etag": "\"9b3ff68b3756\""
+  },
+  "cases/cntl/koc-workshop.webp": {
+    "key": "cases/cntl/koc-workshop.webp",
+    "contentType": "image/webp",
+    "width": 1178,
+    "height": 780,
+    "bytes": 187778,
+    "etag": "\"661a3e797c0a\""
+  },
+  "cases/phl/cover.webp": {
+    "key": "cases/phl/cover.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 933,
+    "bytes": 92342,
+    "etag": "\"dab8ac5ca285\""
+  },
+  "cases/phl/press-dantri.webp": {
+    "key": "cases/phl/press-dantri.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 831,
+    "bytes": 106506,
+    "etag": "\"8b0f222f9e88\""
+  },
+  "cases/phl/press-vnexpress.webp": {
+    "key": "cases/phl/press-vnexpress.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 842,
+    "bytes": 126384,
+    "etag": "\"279516480f0b\""
+  },
+  "cases/phl/press-tuoitre.webp": {
+    "key": "cases/phl/press-tuoitre.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 911,
+    "bytes": 133416,
+    "etag": "\"5bd03bda637c\""
+  },
+  "cases/phl/press-dnsg.webp": {
+    "key": "cases/phl/press-dnsg.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 825,
+    "bytes": 100538,
+    "etag": "\"d314ea765fae\""
+  },
+  "cases/phl/press-vietcetera.webp": {
+    "key": "cases/phl/press-vietcetera.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 788,
+    "bytes": 81520,
+    "etag": "\"a9c58f87aad8\""
+  },
+  "cases/phl/csr-vinh-long.webp": {
+    "key": "cases/phl/csr-vinh-long.webp",
+    "contentType": "image/webp",
+    "width": 675,
+    "height": 673,
+    "bytes": 107988,
+    "etag": "\"f3b1a62a9acd\""
+  },
+  "cases/phl/btd-01.webp": {
+    "key": "cases/phl/btd-01.webp",
+    "contentType": "image/webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 31492,
+    "etag": "\"850c139d7847\""
+  },
+  "cases/phl/btd-02.webp": {
+    "key": "cases/phl/btd-02.webp",
+    "contentType": "image/webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 50410,
+    "etag": "\"19bfa2ad9e62\""
+  },
+  "cases/phl/btd-03.webp": {
+    "key": "cases/phl/btd-03.webp",
+    "contentType": "image/webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 36444,
+    "etag": "\"db09a92cf2af\""
+  },
+  "cases/phl/btd-04.webp": {
+    "key": "cases/phl/btd-04.webp",
+    "contentType": "image/webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 39082,
+    "etag": "\"56ac81464a46\""
+  },
+  "cases/phl/btd-05.webp": {
+    "key": "cases/phl/btd-05.webp",
+    "contentType": "image/webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 35642,
+    "etag": "\"6293be23db93\""
+  },
+  "cases/phl/btd-06.webp": {
+    "key": "cases/phl/btd-06.webp",
+    "contentType": "image/webp",
+    "width": 800,
+    "height": 800,
+    "bytes": 35106,
+    "etag": "\"43e6c29a1578\""
+  },
+  "cases/phl/outing-2025.webp": {
+    "key": "cases/phl/outing-2025.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 980,
+    "bytes": 292216,
+    "etag": "\"6cde5c89eb91\""
+  },
+  "cases/phl/caa-trophy.webp": {
+    "key": "cases/phl/caa-trophy.webp",
+    "contentType": "image/webp",
+    "width": 1329,
+    "height": 1400,
+    "bytes": 98736,
+    "etag": "\"67e013344630\""
+  },
+  "cases/phl/ceo-msg-vi.webp": {
+    "key": "cases/phl/ceo-msg-vi.webp",
+    "contentType": "image/webp",
+    "width": 990,
+    "height": 1400,
+    "bytes": 257194,
+    "etag": "\"6c52a3ea893d\""
+  },
+  "cases/phl/ceo-msg-en.webp": {
+    "key": "cases/phl/ceo-msg-en.webp",
+    "contentType": "image/webp",
+    "width": 990,
+    "height": 1400,
+    "bytes": 220360,
+    "etag": "\"1ce81a68cee1\""
+  },
+  "cases/phl/social-2612.webp": {
+    "key": "cases/phl/social-2612.webp",
+    "contentType": "image/webp",
+    "width": 1000,
+    "height": 1000,
+    "bytes": 112382,
+    "etag": "\"7740489412a3\""
+  },
+  "cases/phl/social-3112.webp": {
+    "key": "cases/phl/social-3112.webp",
+    "contentType": "image/webp",
+    "width": 1436,
+    "height": 720,
+    "bytes": 116012,
+    "etag": "\"80430266adef\""
+  },
+  "cases/phl/web-hero.webp": {
+    "key": "cases/phl/web-hero.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 844,
+    "bytes": 57490,
+    "etag": "\"8d6ed211c4bc\""
+  },
+  "cases/phl/web-home-full.webp": {
+    "key": "cases/phl/web-home-full.webp",
+    "contentType": "image/webp",
+    "width": 566,
+    "height": 1764,
+    "bytes": 103690,
+    "etag": "\"b7a4d7eec41c\""
+  },
+  "cases/phl/web-product-full.webp": {
+    "key": "cases/phl/web-product-full.webp",
+    "contentType": "image/webp",
+    "width": 688,
+    "height": 1764,
+    "bytes": 120576,
+    "etag": "\"2a527a60d814\""
+  },
+  "cases/phl/web-claims.webp": {
+    "key": "cases/phl/web-claims.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 915,
+    "bytes": 76914,
+    "etag": "\"18ad396e6083\""
+  },
+  "cases/phl/web-health.webp": {
+    "key": "cases/phl/web-health.webp",
+    "contentType": "image/webp",
+    "width": 1400,
+    "height": 1281,
+    "bytes": 132784,
+    "etag": "\"529e254c4ade\""
+  }
+}
